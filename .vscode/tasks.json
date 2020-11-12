@@ -1,0 +1,89 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "build",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"build",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		},
+		{
+			"label": "publish",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"publish",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "watch",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"watch",
+				"run",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"/property:GenerateFullPaths=true",
+				"/consoleloggerparameters:NoSummary"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-targeted-linux",
+			"command": "dotnet",
+			"type": "process",
+			"promptOnClose": false,
+			"args": [
+				"publish",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"-r", "linux-x64",
+				"-o", "./FileSplitter/executable/linux-x64/",
+				"--self-contained", "true"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-targeted-win",
+			"command": "dotnet",
+			"type": "process",
+			"promptOnClose": false,
+			"args": [
+				"publish",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"-r", "win-x64",
+				"-o", "./FileSplitter/executable/win-x64/",
+				"--self-contained", "true"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
+			"label": "build-targeted-osx",
+			"command": "dotnet",
+			"type": "process",
+			"promptOnClose": false,
+			"args": [
+				"publish",
+				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"-r", "osx-x64",
+				"-o", "./FileSplitter/executable/osx-x64/",
+				"--self-contained", "true"
+			],
+			"problemMatcher": "$msCompile"
+		}
+
+	]
+}
