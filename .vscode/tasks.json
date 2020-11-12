@@ -7,7 +7,7 @@
 			"type": "process",
 			"args": [
 				"build",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -18,12 +18,22 @@
 			}
 		},
 		{
+			"label": "clean",
+			"command": "dotnet",
+			"type": "process",
+			"args": [
+				"clean",
+				"${workspaceFolder}/src/"
+			],
+			"problemMatcher": "$msCompile"
+		},
+		{
 			"label": "publish",
 			"command": "dotnet",
 			"type": "process",
 			"args": [
 				"publish",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
@@ -36,50 +46,50 @@
 			"args": [
 				"watch",
 				"run",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"/property:GenerateFullPaths=true",
 				"/consoleloggerparameters:NoSummary"
 			],
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "build-targeted-linux",
+			"label": "publish-targeted-linux",
 			"command": "dotnet",
 			"type": "process",
 			"promptOnClose": false,
 			"args": [
 				"publish",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"-r", "linux-x64",
-				"-o", "./FileSplitter/executable/linux-x64/",
+				"-o", "./src/executable/linux-x64/",
 				"--self-contained", "true"
 			],
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "build-targeted-win",
+			"label": "publish-targeted-win",
 			"command": "dotnet",
 			"type": "process",
 			"promptOnClose": false,
 			"args": [
 				"publish",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"-r", "win-x64",
-				"-o", "./FileSplitter/executable/win-x64/",
+				"-o", "./src/executable/win-x64/",
 				"--self-contained", "true"
 			],
 			"problemMatcher": "$msCompile"
 		},
 		{
-			"label": "build-targeted-osx",
+			"label": "publish-targeted-osx",
 			"command": "dotnet",
 			"type": "process",
 			"promptOnClose": false,
 			"args": [
 				"publish",
-				"${workspaceFolder}/FileSplitter/FileSplitter.csproj",
+				"${workspaceFolder}/src/FileSplitter.csproj",
 				"-r", "osx-x64",
-				"-o", "./FileSplitter/executable/osx-x64/",
+				"-o", "./src/executable/osx-x64/",
 				"--self-contained", "true"
 			],
 			"problemMatcher": "$msCompile"
