@@ -22,6 +22,7 @@ namespace FileSplitter {
 				var deleteOriginalFileStr = builder.Build().GetSection("AppParameters").GetSection("DeleteOriginalFile").Value;
 				var archivePath = builder.Build().GetSection("AppParameters").GetSection("ArchivePath").Value;
 				var archivePathGroupByDateStr = builder.Build().GetSection("AppParameters").GetSection("ArchivePathGroupByDate").Value;
+				var showProgressEveryXRecordsStr = builder.Build().GetSection("AppParameters").GetSection("ShowProgressEveryXRecords").Value;
 
 				// validate parameters
 				if (!int.TryParse(recordsTresholdStr, out var recordsTreshold)) {
@@ -57,8 +58,18 @@ namespace FileSplitter {
 				if (!string.IsNullOrWhiteSpace(archivePath)) {
 					if (!Directory.Exists(archivePath)) {
 						Utils.PrintErrorMessage($"Archive folder does not exist: '{archivePath}'");
-						return 2;
+						return 6;
 					}
+				}
+
+				if (!int.TryParse(showProgressEveryXRecordsStr, out var showProgressEveryXRecords)) {
+					Utils.PrintErrorMessage("The value in 'ShowProgressEveryXRecords' is not a valid positive integer");
+					return 1;
+				}
+
+				if (showProgressEveryXRecords <= 0) {
+					Utils.PrintErrorMessage("The value in 'ShowProgressEveryXRecords' is not a valid positive integer");
+					return 1;
 				}
 
 				FileSplitter.Configuration config = new Configuration {
@@ -68,7 +79,8 @@ namespace FileSplitter {
 						RecordsTreshold = recordsTreshold,
 						DeleteOriginalFile = deleteOriginalFile,
 						ArchivePath = archivePath,
-						ArchivePathGroupByDate = archivePathGroupByDate
+						ArchivePathGroupByDate = archivePathGroupByDate,
+						ShowProgressEveryXRecords = showProgressEveryXRecords
 				};
 
 				// go split the files

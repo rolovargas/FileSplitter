@@ -27,7 +27,7 @@ namespace FileSplitter {
 					FileInfo file = new FileInfo(currentFilePath);
 					var fileName = file.Name.Substring(0, file.Name.Length - file.Extension.Length);
 
-					Utils.PrintMessage($"Splitting file '{file.Name}'");
+					Utils.PrintMessage($"Reading file '{file.Name}'");
 
 					using(StreamReader sr = new StreamReader(currentFilePath)) {
 						string line;
@@ -50,7 +50,7 @@ namespace FileSplitter {
 							}
 							sw.WriteLine(line);
 
-							if (recordsRead % 100 == 0) {
+							if (recordsRead % this.Config.ShowProgressEveryXRecords == 0) {
 								Utils.PrintMessage($"{recordsRead} records read");
 							}
 						}
@@ -62,11 +62,18 @@ namespace FileSplitter {
 						}
 					}
 
-					// done reading the file
+					Utils.PrintMessage($"Finished reading file '{file.Name}'");
 
 					// should it move it to archive folder?
+					// TODO: update with proper file path
+					Utils.PrintMessage($"Creating archive copy to folder '{file.Name}'");
 
 					// should delete source file?
+					if (this.Config.DeleteOriginalFile) {
+						Utils.PrintMessage($"Deleting file '{file.Name}'");
+						file.Delete();
+						Utils.PrintMessage($"Deleted file '{file.Name}'");
+					}
 
 				}
 

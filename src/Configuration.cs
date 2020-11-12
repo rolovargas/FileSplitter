@@ -7,6 +7,7 @@ namespace FileSplitter {
 		public bool DeleteOriginalFile { get; set; }
 		public string ArchivePath { get; set; }
 		public bool ArchivePathGroupByDate { get; set; }
+		public int ShowProgressEveryXRecords { get; set; }
 
 	}
 }
