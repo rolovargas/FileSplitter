@@ -50,9 +50,12 @@ namespace FileSplitter {
 					return 4;
 				}
 
-				if (!bool.TryParse(archivePathGroupByDateStr, out var archivePathGroupByDate)) {
-					Utils.PrintErrorMessage("The value in 'ArchivePathGroupByDate' is not valid");
-					return 5;
+				var archivePathGroupByDate = true;
+				if (!string.IsNullOrWhiteSpace(archivePathGroupByDateStr)) {
+					if (!bool.TryParse(archivePathGroupByDateStr, out archivePathGroupByDate)) {
+						Utils.PrintErrorMessage("The value in 'ArchivePathGroupByDate' is not valid");
+						return 5;
+					}
 				}
 
 				if (!string.IsNullOrWhiteSpace(archivePath)) {
@@ -64,12 +67,13 @@ namespace FileSplitter {
 
 				if (!int.TryParse(showProgressEveryXRecordsStr, out var showProgressEveryXRecords)) {
 					Utils.PrintErrorMessage("The value in 'ShowProgressEveryXRecords' is not a valid positive integer");
-					return 1;
 				}
 
 				if (showProgressEveryXRecords <= 0) {
 					Utils.PrintErrorMessage("The value in 'ShowProgressEveryXRecords' is not a valid positive integer");
-					return 1;
+				}
+				if (showProgressEveryXRecords <= 0) {
+					showProgressEveryXRecords = 1000;
 				}
 
 				FileSplitter.Configuration config = new Configuration {
