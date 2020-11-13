@@ -65,8 +65,17 @@ namespace FileSplitter {
 					Utils.PrintMessage($"Finished reading file '{file.Name}'");
 
 					// should it move it to archive folder?
-					// TODO: update with proper file path
-					Utils.PrintMessage($"Creating archive copy to folder '{file.Name}'");
+					if (!string.IsNullOrWhiteSpace(this.Config.ArchivePath)) {
+						var archivePath = this.Config.ArchivePath;
+						if (this.Config.ArchivePathGroupByDate) {
+							archivePath = Path.Combine(archivePath, DateTime.Now.ToString("yyyy-MM-dd"));
+						}
+						Utils.PrintMessage($"Creating archive copy to folder '{archivePath}'");
+						if (!Directory.Exists(archivePath)) {
+							Directory.CreateDirectory(archivePath);
+						}
+						file.CopyTo(Path.Combine(archivePath, file.Name));
+					}
 
 					// should delete source file?
 					if (this.Config.DeleteOriginalFile) {
